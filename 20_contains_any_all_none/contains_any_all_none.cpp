@@ -28,8 +28,7 @@ bool contains_all(Container& c, T&&... args)
 template <typename Container, typename... T>
 bool contains_none(Container& c, T&&... args)
 {
-    //The solution has a std::forward here. Why here and not in the other functions?
-    return !(contains_any(c, args...));
+    return !(contains_any(c, std::forward<T>(args)...));
 }
 
 int main()
