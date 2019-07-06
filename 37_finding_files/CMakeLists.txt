@@ -1,0 +1,5 @@
+cmake_minimum_required(VERSION 3.10)
+project (finding_files)
+add_executable(finding_files finding_files.cpp)
+target_link_libraries(finding_files PUBLIC stdc++fs)
+set_property(TARGET finding_files PROPERTY CXX_STANDARD 17)

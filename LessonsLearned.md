@@ -1,5 +1,43 @@
 # Lessons Learned
 
+## 06.07.2019 Using gcc-8 with cmake (37)
+
+So far I used gcc-7, but filesystem is not included. Everything works with clang-7.
+I didn't get gcc-8 to work:
+
+~~~sh
+cmake -DCMAKE_C_COMPILER=/usr/bin/clang-7 -DCMAKE_CXX_COMPILER=/usr/bin/clang++-7 ../ #works
+cmake -DCMAKE_C_COMPILER=gcc-8 -DCMAKE_CXX_COMPILER=g++-8 ../ #doesn't work
+~~~
+
+It stalls and never finishes to run.
+Compiling on the commandline works fine:
+
+~~~sh
+g++-8 -std=c++17 ../37_finding_files/finding_files.cpp -lstdc++fs -o finding_files
+~~~
+
+Since cmake and g++-8 work I guess that it is some setup problem. Will be continued.
+
+## 06.07.2019 Raw strings (37)
+
+[String literals](https://en.cppreference.com/w/cpp/language/string_literal)
+
+~~~c++
+const char* s1 = R"foo(
+Hello
+World
+)foo";
+//same as
+const char* s2 = "\nHello\nWorld\n";
+~~~
+
+## 06.07.2019 std::filesystem (37)
+
+- Using `std::filesystem` requires linking against `stdc++fs`.
+- `directory_iterator` (iterate over directory) vs. `recursive_directory_iterator` (also iterates over subdirectories)
+- [Get the filename](https://en.cppreference.com/w/cpp/filesystem/path/filename): `for(auto& file : iterator){auto filename = file.path().filename();}`
+
 ## 26.06.2019 Using a template parameter to define the scale and type traits for conversion (22)
 
 Book answer, not implemented. I would have written Constructors taking an object of the other class as argument. But having just one class with a Template Parameter defining the scale is need and probably saves a lot of code when writing all 3 scales.
