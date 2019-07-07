@@ -1,23 +1,33 @@
 # Lessons Learned
 
-## 06.07.2019 Using gcc-8 with cmake (37)
+## 07.07.2019 ExternalProject_Add (43)
 
-So far I used gcc-7, but filesystem is not included. Everything works with clang-7.
-I didn't get gcc-8 to work:
+Add a git repo via [CMake](https://cmake.org/cmake/help/latest/module/ExternalProject.html):
 
-~~~sh
-cmake -DCMAKE_C_COMPILER=/usr/bin/clang-7 -DCMAKE_CXX_COMPILER=/usr/bin/clang++-7 ../ #works
-cmake -DCMAKE_C_COMPILER=gcc-8 -DCMAKE_CXX_COMPILER=g++-8 ../ #doesn't work
+~~~CMake
+include(ExternalProject)
+find_package(Git REQUIRED)
+
+list(APPEND DATE_CMAKE_ARGS
+    "-DCMAKE_INSTALL_PREFIX=${EXTERNAL_PATH}"
+    "-DCMAKE_C_COMPILER=${CMAKE_C_COMPILER}"
+    "-DCMAKE_CXX_COMPILER=${CMAKE_CXX_COMPILER}"
+)
+
+ExternalProject_Add(
+    date
+    GIT_REPOSITORY      https://github.com/HowardHinnant/date.git
+    GIT_TAG             v2.4.1
+    GIT_SHALLOW         1
+    CMAKE_ARGS          ${DATE_CMAKE_ARGS}
+    PREFIX              ${EXTERNAL_PATH}/date/prefix
+    TMP_DIR             ${EXTERNAL_PATH}/date/tmp
+    STAMP_DIR           ${EXTERNAL_PATH}/date/stamp
+    DOWNLOAD_DIR        ${EXTERNAL_PATH}/date/download
+    SOURCE_DIR          ${EXTERNAL_PATH}/date/src
+    BINARY_DIR          ${EXTERNAL_PATH}/date/build
+)
 ~~~
-
-It stalls and never finishes to run.
-Compiling on the commandline works fine:
-
-~~~sh
-g++-8 -std=c++17 ../37_finding_files/finding_files.cpp -lstdc++fs -o finding_files
-~~~
-
-Since cmake and g++-8 work I guess that it is some setup problem. Will be continued.
 
 ## 06.07.2019 Raw strings (37)
 
