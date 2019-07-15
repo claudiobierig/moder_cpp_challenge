@@ -1,5 +1,25 @@
 # Open Questions
 
+## 15.07.2019 Using gcc-8 with cmake (follow up)
+
+Clean VM Setup has no problems. gcc-8 has the problem on my system:
+
+~~~sh
+$ gcc-8 test.c
+gcc-8: internal compiler error: Segmentation fault signal terminated program cc1
+Please submit a full bug report,
+with preprocessed source if appropriate.
+See <file:///usr/share/doc/gcc-8/README.Bugs> for instructions.
+~~~
+
+where `test.c` is just
+
+~~~C
+int main() { return 0; }
+~~~
+
+which works fine with `gcc-7`.
+
 ## 07.07.2019 External Dependencies
 
 - What is a good choice for the place to put them/avoid giving a global path?
@@ -13,7 +33,7 @@ I didn't get gcc-8 to work:
 
 ~~~sh
 cmake -DCMAKE_C_COMPILER=/usr/bin/clang-7 -DCMAKE_CXX_COMPILER=/usr/bin/clang++-7 ../ #works
-cmake -DCMAKE_C_COMPILER=gcc-8 -DCMAKE_CXX_COMPILER=g++-8 ../ #doesn't work
+cmake -DCMAKE_C_COMPILER=/usr/bin/gcc-8 -DCMAKE_CXX_COMPILER=/usr/bin/g++-8 ../ #doesn't work
 ~~~
 
 It stalls and never finishes to run.
