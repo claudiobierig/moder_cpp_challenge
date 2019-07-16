@@ -1,28 +1,10 @@
-/*#include "date/tz.h"
+#include "date/tz.h"
 #include <iostream>
 
 int main()
 {
-    using namespace date;
-    using namespace std::chrono_literals;
-    try
-    {
-        auto zt = make_zoned("America/New_York", local_days{Sunday[2]/March/2016} + 2h + 30min);
-        std::cout << zt << "\n";
-    }
-    catch (const nonexistent_local_time& e)
-    {
-        std::cout << e.what() << '\n';
-    }
-}
-
-*/
-#include "date/tz.h"
-#include <iostream>
-
-int
-main()
-{
+    //Example from documentation
+    //Remaining task seems trivial, skip rest of exercise
     using namespace date;
     using namespace date::literals;
     using namespace std::chrono_literals;

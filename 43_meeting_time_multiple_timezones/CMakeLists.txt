@@ -3,8 +3,8 @@ cmake_minimum_required(VERSION 3.10)
 project (meeting_times)
 
 add_executable(meeting_times
-    ../external/date/src/tz.cpp
     meeting_times.cpp
+    ../external/date/src/tz.cpp
 )
 
 set_property(TARGET meeting_times PROPERTY CXX_STANDARD 17)
