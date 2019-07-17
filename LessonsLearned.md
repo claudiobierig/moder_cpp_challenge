@@ -1,5 +1,28 @@
 # Lessons Learned
 
+## 17.07.2019 linking against pthread (61)
+
+Needed to link against pthread ([Stackoverflow](https://stackoverflow.com/questions/1620918/cmake-and-libpthread)):
+
+~~~cmake
+find_package (Threads)
+target_link_libraries (parallel_transforms ${CMAKE_THREAD_LIBS_INIT})
+~~~
+
+## 17.07.2019 async + features vs threads (61)
+
+No big difference on my Laptop. However async needed a bit of tuning when to stop the recursion.
+A correct implementation should be aware of the depth and have the maximal depth depending on `std::thread::hardware_concurrency()` as in the book solution instead of the number of elements (or probably additional to).
+
+## 17.07.2019 Git submodules (43)
+
+Git submodules seemed to be an easier way, compared to ExternalProject_Add. It allows local modification for debugging, VS Code finds the source code, a clean build can be performed without a `git pull` and worked out of the box. Setup on a new PC only requires additional
+
+~~~sh
+git submodule init
+git submodule update
+~~~
+
 ## 07.07.2019 ExternalProject_Add (43)
 
 Add a git repo via [CMake](https://cmake.org/cmake/help/latest/module/ExternalProject.html):
