@@ -1,5 +1,20 @@
 # Lessons Learned
 
+## 18.07.2019 futures and async (61)
+
+~~~c++
+#include <future>
+
+auto handle = std::async(std::launch::async, function, args...);
+
+//do stuff here
+
+handle.wait(); //in case of function beeing void
+auto result = handle.get(); //in case of function having a return value
+~~~
+
+Additionally we need to link against pthread.
+
 ## 17.07.2019 linking against pthread (61)
 
 Needed to link against pthread ([Stackoverflow](https://stackoverflow.com/questions/1620918/cmake-and-libpthread)):

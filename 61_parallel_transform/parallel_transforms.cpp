@@ -95,21 +95,21 @@ int main()
     std::transform(data1.begin(), data1.end(), data1.begin(), [](int const e) {return e * e; });
     auto end = std::chrono::system_clock::now();
     auto t1 = std::chrono::duration_cast<std::chrono::milliseconds>(end - start);
-    std::cout << "time: " << t1.count() << "ms" << std::endl;
+    std::cout << "std::transform time: " << t1.count() << "ms" << std::endl;
 
     //parallel
     start = std::chrono::system_clock::now();
     auto result = parallel_loop(data, [](int const e) {return e * e; });
     end = std::chrono::system_clock::now();
     auto t2 = std::chrono::duration_cast<std::chrono::milliseconds>(end - start);
-    std::cout << "time: " << t2.count() << "ms" << std::endl;
+    std::cout << "parallel version time: " << t2.count() << "ms" << std::endl;
 
     //Book solution
     start = std::chrono::system_clock::now();
     auto r2 = palter(data, [](int const e) {return e * e; });
     end = std::chrono::system_clock::now();
     auto t3 = std::chrono::duration_cast<std::chrono::milliseconds>(end - start);
-    std::cout << "time: " << t3.count() << "ms" << std::endl;
+    std::cout << "book solution time: " << t3.count() << "ms" << std::endl;
 
     assert(data1 == result);
     assert(data1 == r2);
