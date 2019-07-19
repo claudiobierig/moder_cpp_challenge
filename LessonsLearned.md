@@ -1,5 +1,93 @@
 # Lessons Learned
 
+## 19.07.2019 std::condition_variable and std::unique_lock (66)
+
+Not implemented, only from reading the book answer. See also [CppCoreGuidelines](http://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#Rconc-wait) and a more detailed description on [modernescpp](https://www.modernescpp.com/index.php/c-core-guidelines-be-aware-of-the-traps-of-condition-variables).
+I think implementing an Event Loop with these constructs should be possible such that an async function doesn't disturb the reading:
+
+~~~c++
+sync_stuff();
+async_sleep(); //or some expensive operation
+continue_sync_stuff_after_async_sleep();
+~~~
+
+Example from [cppreference](https://en.cppreference.com/w/cpp/thread/condition_variable):
+
+~~~c++
+#include <iostream>
+#include <string>
+#include <thread>
+#include <mutex>
+#include <condition_variable>
+
+std::mutex m;
+std::condition_variable cv;
+std::string data;
+bool ready = false;
+bool processed = false;
+
+void worker_thread()
+{
+    // Wait until main() sends data
+    std::unique_lock<std::mutex> lk(m);
+    cv.wait(lk, []{return ready;});
+
+    // after the wait, we own the lock.
+    std::cout << "Worker thread is processing data\n";
+    data += " after processing";
+
+    // Send data back to main()
+    processed = true;
+    std::cout << "Worker thread signals data processing completed\n";
+
+    // Manual unlocking is done before notifying, to avoid waking up
+    // the waiting thread only to block again (see notify_one for details)
+    lk.unlock();
+    cv.notify_one();
+}
+
+int main()
+{
+    std::thread worker(worker_thread);
+    data = "Example data";
+    // send data to the worker thread
+    {
+        std::lock_guard<std::mutex> lk(m);
+        ready = true;
+        std::cout << "main() signals data ready for processing\n";
+    }
+    cv.notify_one();
+    // wait for the worker
+    {
+        std::unique_lock<std::mutex> lk(m);
+        cv.wait(lk, []{return processed;});
+    }
+    std::cout << "Back in main(), data = " << data << '\n';
+    worker.join();
+}
+~~~
+
+~~~sh
+main() signals data ready for processing
+Worker thread is processing data
+Worker thread signals data processing completed
+Back in main(), data = Example data after processing
+~~~
+
+## 18.07.2019 std::priority_queue (66)
+
+Not implemented, only from reading the book answer.
+
+~~~c++
+//https://en.cppreference.com/w/cpp/container/priority_queue
+#include <queue>
+
+std::priority_queue<int> q;
+for(int n : {1,8,5,6,3,4,0,9,7,2})
+    q.push(n);
+print_queue(q);//9 8 7 6 5 4 3 2 1 0
+~~~
+
 ## 18.07.2019 futures and async (61)
 
 ~~~c++
