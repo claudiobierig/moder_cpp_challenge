@@ -9,7 +9,7 @@ Only thought of solutions and read answers.
 - 69: Didn't know template method pattern, but would have basically done the same. Probably without the factory on top.
 - 70: Didn't know chain of command pattern. Can't think of a problem I encountered where I would have liked to use it. Could be nice in error handling.
 - 71: Had basically the same thoughts.
-- 72: Would also have used the strategy pattern. Probably would have made price_calculator a function in Order class. A bit less coupled this way.
+- 72: Would also have used the strategy pattern. Probably would have made price_calculator a function in Order class. A bit less coupled this way. Very similar problem in [Fluent Python](https://github.com/fluentpython/example-code/blob/master/07-closure-deco/strategy_best4.py) with a bit less functionality, but only a few lines of code using decorators (python decorators, not the design pattern).
 
 ## 19.07.2019 std::condition_variable and std::unique_lock (66)
 

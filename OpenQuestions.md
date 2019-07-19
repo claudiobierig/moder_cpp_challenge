@@ -1,5 +1,9 @@
 # Open Questions
 
+## 19.07.2019 External Dependencies (follow up)
+
+Works fine so far with subrepositories.
+
 ## 15.07.2019 Using gcc-8 with cmake (follow up)
 
 Clean VM Setup has no problems. gcc-8 has the problem on my system:
