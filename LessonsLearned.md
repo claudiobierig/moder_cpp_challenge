@@ -1,5 +1,16 @@
 # Lessons Learned
 
+## 19.07.2019 Design Patterns (67-72)
+
+Only thought of solutions and read answers.
+
+- 67: Would have implemented it with just a vector of password validators.
+- 68: Wouldn't have used same baseclass for single and combined rules (so basically not used composite).
+- 69: Didn't know template method pattern, but would have basically done the same. Probably without the factory on top.
+- 70: Didn't know chain of command pattern. Can't think of a problem I encountered where I would have liked to use it. Could be nice in error handling.
+- 71: Had basically the same thoughts.
+- 72: Would also have used the strategy pattern. Probably would have made price_calculator a function in Order class. A bit less coupled this way.
+
 ## 19.07.2019 std::condition_variable and std::unique_lock (66)
 
 Not implemented, only from reading the book answer. See also [CppCoreGuidelines](http://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#Rconc-wait) and a more detailed description on [modernescpp](https://www.modernescpp.com/index.php/c-core-guidelines-be-aware-of-the-traps-of-condition-variables).
