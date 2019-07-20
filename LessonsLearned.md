@@ -1,5 +1,91 @@
 # Lessons Learned
 
+## 20.07.2019 git submodules (75)
+
+Had to look up submodules again, so:
+
+~~~sh
+# First time
+cd external
+git submodule add https://github.com/nlohmann/json.git
+# and on VM after a pull
+cd external/json
+git submodule init
+git submodule update
+~~~
+
+## 20.07.2019 nlohmann/json (75-76)
+
+The syntax is very simple.
+
+~~~c++
+// create an empty structure (null)
+json j;
+
+// add a number that is stored as double (note the implicit conversion of j to an object)
+j["pi"] = 3.141;
+
+// add a Boolean that is stored as bool
+j["happy"] = true;
+
+// add a string that is stored as std::string
+j["name"] = "Niels";
+
+// add another null object by passing nullptr
+j["nothing"] = nullptr;
+
+// add an object inside the object
+j["answer"]["everything"] = 42;
+
+// add an array that is stored as std::vector (using an initializer list)
+j["list"] = { 1, 0, 2 };
+
+// add another object (using an initializer list of pairs)
+j["object"] = { {"currency", "USD"}, {"value", 42.99} };
+
+// instead, you could also write (which looks very similar to the JSON above)
+json j2 = {
+  {"pi", 3.141},
+  {"happy", true},
+  {"name", "Niels"},
+  {"nothing", nullptr},
+  {"answer", {
+    {"everything", 42}
+  }},
+  {"list", {1, 0, 2}},
+  {"object", {
+    {"currency", "USD"},
+    {"value", 42.99}
+  }}
+};
+~~~
+
+Missed
+
+~~~c++
+void to_json(json& j, CustomObject const & co)
+{
+   j = json{ {"my", "representation"} };
+}
+~~~
+
+which allows the library to automatically loop over containers.
+
+Skipped 76. Again, syntax seems very clear:
+
+~~~c++
+//ifile as std::ifstream and jdata as json:
+ifile >> jdata;
+//looping over top array movies and getting the id:
+for (auto & element : jdata.at("movies")){
+    auto id = element.at("id").get<unsigned int>();
+}
+~~~
+
+Exception handling is used for errors. Probably when missing a parameter or having a typemissmatch.
+
+Setup was really simple.
+
 ## 19.07.2019 Design Patterns (67-72)
 
 Only thought of solutions and read answers.
