@@ -1,0 +1,5 @@
+cmake_minimum_required(VERSION 3.10)
+project (data_to_json)
+add_executable(data_to_json data_to_json.cpp)
+set_property(TARGET data_to_json PROPERTY CXX_STANDARD 17)
+target_include_directories(data_to_json PUBLIC ../external/json/include)
