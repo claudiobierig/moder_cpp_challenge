@@ -9,7 +9,6 @@ Had to look up submodules again, so:
 cd external
 git submodule add https://github.com/nlohmann/json.git
 # and on VM after a pull
-cd external/json
 git submodule init
 git submodule update
 ~~~

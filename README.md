@@ -4,9 +4,11 @@ Implementing problems from "The Modern C++ Challenge" by Marius Bancila
 
 [Git repo with solutions](https://github.com/PacktPublishing/The-Modern-Cpp-Challenge)
 
-Setup of submodules:
+Setup (requirements listed in REQUIREMENTS.md):
 
 ~~~sh
+git clone git@github.com:claudiobierig/modern_cpp_challenge.git
+cd modern_cpp_challenge
 git submodule init
 git submodule update
 ~~~
