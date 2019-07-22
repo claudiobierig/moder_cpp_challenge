@@ -1,5 +1,9 @@
 # Lessons Learned
 
+## 21.07.2019 List of Open Source libraries
+
+Stumbled onto a [list](https://en.cppreference.com/w/cpp/links/libs) of Open Source libraries.
+
 ## 20.07.2019 git submodules (75)
 
 Had to look up submodules again, so:
