@@ -1,5 +1,18 @@
 # Lessons Learned
 
+## 22.08.2019 Building external library from cmake
+
+As is, it doesn't remember I already build this.
+
+~~~cmake
+add_custom_target(libfoo DEPENDS "${CMAKE_BINARY_DIR}/libfoo")
+add_custom_command(OUTPUT "${CMAKE_BINARY_DIR}/libfoo"
+                   WORKING_DIRECTORY "${CMAKE_SOURCE_DIR}/external/libfoo"
+                   COMMAND build_libfoo.sh)
+
+add_dependencies(my_target libfoo)
+~~~
+
 ## 21.07.2019 List of Open Source libraries
 
 Stumbled onto a [list](https://en.cppreference.com/w/cpp/links/libs) of Open Source libraries.

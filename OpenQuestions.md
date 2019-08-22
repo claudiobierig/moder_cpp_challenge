@@ -1,5 +1,9 @@
 # Open Questions
 
+## 22.08.2019 Build submodule from cmake
+
+At the moment it works, but it builds on every `make`. Most likely I need to change the OUTPUT parameter.
+
 ## 19.07.2019 External Dependencies (follow up)
 
 Works fine so far with subrepositories.
